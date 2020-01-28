@@ -7,17 +7,32 @@ import { GraphQLModule } from './graphql.module';
 import { HomeComponent } from './home/home.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalComponent } from './modal/modal.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NewTaskComponent } from './tasks/new-task/new-task.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, TasksComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    TasksComponent,
+    NewTaskComponent,
+    ModalComponent
+  ],
   imports: [
     BrowserModule,
     GraphQLModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent]
 })
 export class AppModule {}

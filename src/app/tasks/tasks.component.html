@@ -1,14 +1,32 @@
-<table
-  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"
->
+<div>
+  <button (click)="poll()">
+    {{
+      polling
+        ? 'auto refresh is active....click to deactivate'
+        : 'click to activate auto refresh'
+    }}
+  </button>
+  <button (click)="update()">
+    refresh
+  </button>
+</div>
+
+<app-new-task></app-new-task>
+
+<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
   <tr>
     <th class="mdl-data-table__cell--non-numeric">Id</th>
     <th class="mdl-data-table__cell--non-numeric">Title</th>
+    <th class="mdl-data-table__cell--non-numeric">Status</th>
   </tr>
   <tr *ngFor="let task of tasks">
     <td class="mdl-data-table__cell--numeric">{{ task.id }}</td>
-    <td class="mdl-data-table__cell--non-numeric">{{ task.completed }}</td>
     <td class="mdl-data-table__cell--non-numeric">{{ task.title }}</td>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button (click)="toggle(task.id)">
+        {{ task.status ? 'stop' : 'start' }}
+      </button>
+    </td>
   </tr>
 </table>
 
@@ -26,7 +44,4 @@
   >
     <i class="material-icons">arrow_forward</i>
   </button>
-  <button (click)="update()">update</button>
 </div>
-
-<p>tasks works!</p>

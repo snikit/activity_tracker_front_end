@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QueryRef, Apollo } from 'apollo-angular';
 import { TASKS_API } from '../queries/task.queries';
 import gql from 'graphql-tag';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 @Component({
   selector: 'app-tasks',
@@ -11,6 +12,7 @@ import gql from 'graphql-tag';
 export class TasksComponent implements OnInit {
   page = 1;
   tasks: any[] = [];
+  polling = false;
 
   private query: QueryRef<any>;
 
@@ -27,16 +29,25 @@ export class TasksComponent implements OnInit {
     });
   }
 
+  poll() {
+    this.polling = !this.polling;
+
+    this.polling ? this.query.startPolling(1000) : this.query.stopPolling();
+  }
+
   update() {
+    this.query.refetch({ offset: 10 * this.page });
+  }
+
+  toggle(taskId: number) {
     this.apollo
       .mutate({
-        mutation: gql(TASKS_API.COMPLETE),
+        mutation: gql(TASKS_API.TOGGLE),
         variables: {
-          taskId: 1
+          taskId
         }
       })
       .subscribe();
-    // this.query.refetch({ offset: 10 * this.page });
   }
 
   nextPage() {
