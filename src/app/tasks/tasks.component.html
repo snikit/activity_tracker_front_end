@@ -1,1 +1,32 @@
+<table
+  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"
+>
+  <tr>
+    <th class="mdl-data-table__cell--non-numeric">Id</th>
+    <th class="mdl-data-table__cell--non-numeric">Title</th>
+  </tr>
+  <tr *ngFor="let task of tasks">
+    <td class="mdl-data-table__cell--numeric">{{ task.id }}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{ task.completed }}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{ task.title }}</td>
+  </tr>
+</table>
+
+<div class="paging">
+  <button
+    class="mdl-button mdl-js-button mdl-button--colored"
+    (click)="prevPage()"
+  >
+    <i class="material-icons">arrow_back</i>
+  </button>
+  Page {{ page + 1 }}
+  <button
+    class="mdl-button mdl-js-button mdl-button--colored"
+    (click)="nextPage()"
+  >
+    <i class="material-icons">arrow_forward</i>
+  </button>
+  <button (click)="update()">update</button>
+</div>
+
 <p>tasks works!</p>
